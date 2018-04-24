@@ -1,0 +1,38 @@
+int * add(int* tab, int n, int new_elem);
+
+int main()
+{
+    int *tab=NULL,i;
+
+    for(i=0;i<10;i++)
+    {
+        tab=add(tab,i,i*5);
+
+    }
+    if(tab==NULL)printf("Blad\n");
+    else
+    {
+        for(i=0;i<10;i++)
+        {
+            printf("%d\n",tab[i]);
+        }
+    }
+    return 0;
+}
+
+int * add(int* tab, int n, int new_elem)
+{
+    int *tab1=malloc((n+1)* sizeof(int)),i;
+
+    if(tab1==NULL)return NULL;
+    else
+    {
+        for(i=0;i<n;i++)
+        {
+            *(tab1+i)=*(tab+i);
+        }
+        *(tab1+n)=new_elem;
+    free(tab);
+    return tab1;
+    }
+}

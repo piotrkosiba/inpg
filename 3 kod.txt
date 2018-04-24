@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int *tablica(int dlugosc);
+
+int main()
+{
+    int dlugosc,*wsk,i;
+
+    printf("Podaj dlugosc tablicy\n");
+    scanf("%d",&dlugosc);
+    wsk=tablica(dlugosc);
+    if(wsk==NULL)printf("Blad\n");
+    else
+    {
+        for(i=0;i<dlugosc;i++)
+        {
+            printf("%d\n",wsk[i]);
+        }
+    }
+
+    free(wsk);
+    return 0;
+}
+
+int *tablica(int dlugosc)
+{
+    int i, *tablica;
+    tablica=(int*)malloc(dlugosc * sizeof(int));
+    if(tablica==NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        for(i=0;i<dlugosc;i++)
+        {
+            tablica[i]=(i*2)+1;
+        }
+    }
+    return tablica;
+}

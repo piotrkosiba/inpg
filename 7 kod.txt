@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define R 100
+
+char deleteFirstChar(char** pstr)
+{
+    int dlugosc;
+    char wynik;
+    char* pstr1;
+    char* strcpy (char* pstr1, const char* pstr);
+
+    for(dlugosc=0;(*pstr)[dlugosc]!='\0';dlugosc++);
+
+    pstr1=(char*)malloc(dlugosc * sizeof(char));
+    
+    wynik=*pstr[0];
+
+    if(dlugosc!=0)
+    {
+        strcpy(pstr1, *pstr+1);
+        pstr1[dlugosc-1] =0;
+        free(*pstr);
+        *pstr=pstr1;
+    }
+    else
+    {
+        *pstr=NULL;
+    }
+
+    return wynik;
+}
+
+int main()
+{
+    char *napis;
+    printf("Podaj tekst\n");
+    napis=malloc(R*sizeof(char));
+    if(napis==NULL)
+    {
+        printf("Blad alokacji\n");
+    }
+    fgets(napis,R,stdin);
+
+    while(napis!=NULL)
+    {
+        deleteFirstChar(&napis);
+        puts(napis);
+    }
+    return 0;
+}

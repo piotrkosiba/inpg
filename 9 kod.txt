@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define R 10
+
+struct data
+{
+    int ilosc;
+    struct wpis *ks;
+};
+
+struct wpis
+{
+    char imie[R];
+    char nazwisko[R];
+    long tel;
+};
+
+typedef struct wpis wpis;
+
+int dodaj_rekord(struct data* baza,struct wpis* dodaj )
+{
+    struct wpis *wsk_temp;
+    int size=baza->ilosc;
+    wsk_temp=malloc(sizeof(struct wpis)*(size+1));
+    if(wsk_temp==NULL)
+    {
+        return 0;
+    }
+    int i;
+    for (i=0;i<size;i++)
+    {
+        wsk_temp[i]=(baza->ks)[i];
+    }
+    wsk_temp[size]=*dodaj;
+    free(baza->ks);
+    baza->ks=wsk_temp;
+    baza->ilosc++;
+    return 1;
+}
+
+int usun_rekord(struct data* baza, int nr_wpisu)
+{
+    struct wpis *wsk_temp;
+    int size=baza->ilosc;
+    wsk_temp=malloc(sizeof(struct wpis)*(size-1));
+    int l,m;
+    if(wsk_temp==NULL)
+    {
+        return 0;
+    }
+    for(l=0;l<nr_wpisu;l++)
+    {
+        wsk_temp[l]=(baza->ks)[l];
+    }
+    for(m=nr_wpisu;m<size-1;m--)
+    {
+        wsk_temp[m]=(baza->ks[m-1]);
+    }
+    free(baza->ks);
+    baza->ks=wsk_temp;
+    size--;
+
+    return 0;
+}
+
+int szukaj_rekord(wpis *ks, int rozmiar, long tel)
+{
+    int j;
+    for(j=0;j<rozmiar;j++)
+    if(ks[j].tel==tel)
+    {
+    return j;
+    }
+    else return -1;
+    return 0;
+}
+
+void wyswietl_rekord(struct data*baza ,int nr_wpisu)
+{
+    printf("%d)\n",nr_wpisu);
+    printf("Imie: %s\n",baza->ks[nr_wpisu].imie);
+    printf("Nazwisko: %s \n",baza->ks[nr_wpisu].nazwisko);
+    printf("Tel: %li\n",baza->ks[nr_wpisu].tel);
+}
+
+int main()
+{
+    int operacja,nr_wpisu,il_wpisow=0;
+    long nr_tel;
+    struct wpis dodaj;
+    struct data baza={0,NULL};
+
+    wpis *ks=NULL;
+    while(1)
+    {
+        printf("Podaj numer operacji lub wpisz 0 aby uzyskac pomoc:");
+        scanf("%d",&operacja);
+        getchar();
+        switch(operacja)
+        {
+        case 0:
+            printf("1-Dodaj wpis\n2-Usun wpis\n3-Wyswietl wpis\n4-Szukaj po nr tel\n");
+            printf("Podaj numer operacji:");
+        case 1:
+            printf("Podaj imie:\n");
+            fgets(dodaj.imie,R,stdin);
+            printf("Podaj nazwisko:\n");
+            fgets(dodaj.nazwisko,R,stdin);
+            printf("Podaj numer telefonu:\n");
+            scanf("%li",&dodaj.tel);
+            dodaj_rekord(&baza,&dodaj);
+            break;
+        case 2:
+            printf("Podaj numer w bazie ktory chcesz usunac:");
+            scanf("%d",&nr_wpisu);
+            usun_rekord(&baza,nr_wpisu);
+            break;
+        case 3:
+            printf("Podaj numer wpisu aby go wyswietlic:");
+            scanf("%d",&nr_wpisu);
+            wyswietl_rekord(&baza,nr_wpisu);
+            break;
+        case 4:
+            printf("Podaj numer telefonu aby wyszukac:");
+            scanf("%li",&nr_tel);
+            il_wpisow=baza.ilosc;
+            wyswietl_rekord(&baza,szukaj_rekord(ks,il_wpisow,nr_tel));
+        }
+    }
+
+    return 0;
+}
