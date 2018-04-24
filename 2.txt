@@ -1,0 +1,42 @@
+// oznacza komentarz
+// w tej postaci to obiekt reprezentuj¹cy kolorowy punkt
+public class Figura
+{
+    // operacje (metody)
+    public float obliczPole()
+    {
+        return 0;
+    }
+    
+    public float obliczObwód()
+    {
+        return 0;
+    }
+    
+    public void wyœwietl() { ... }
+    
+    // w³aœciwoœci (atrybuty/pola)
+    private float œrodekX;
+    private float œrodekY;
+    private int kolor; // tak naprawdê do przechowywania(tworzenia)
+                       // koloru u¿ywa siê zazwyczaj obiektu java.awt.Color
+    ...
+}
+// „extends” oznacza dziedziczenie po klasie Figura pól: œrodekX, œrodekY i kolor
+// oraz metod: obliczPole, obliczObwód i wyœwietl
+public class Kwadrat extends Figura
+{
+    // dodatkowe atrybuty
+    private float wierzcho³ekX;
+    private float wierzcho³ekY;
+    private float d³ugoœæBoku;
+
+    // „przes³aniamy” operacje rodzica, dziêki czemu dla ka¿dej zdefiniowanej Figury
+    // mo¿na policzyæ pole czy obwód
+    @Override
+    public float obliczPole()
+    {
+        return d³ugoœæBoku*d³ugoœæBoku;
+    }
+    ...
+}

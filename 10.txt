@@ -1,0 +1,19 @@
+ #include <iostream>
+   2: #include <conio.h>
+   3:  
+   4: using namespace std;
+   5:  
+   6: int main()
+   7: {
+   8:     int r;
+   9:     float pi=3.14;      
+  10:     cout << "Pole kola\n";
+  11:     cout << "Podaj dlugosc promienia: ";
+  12:     cin >> r;
+  13:     cout << "\n"; 
+  14:     int p_kola(pi * (r * r));
+  15:     cout << "Pole wynosi: " << p_kola;
+  16:     getch();
+  17:     return 0;
+  18: }
+  19:     
