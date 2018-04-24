@@ -1,5 +1,5 @@
-printf("Toshiba",%d);
-#include <stdlib.h>
+#include <stdio.h>
+pierwsza wersja
 
 #define ROW 3
 #define COL 4
