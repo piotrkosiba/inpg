@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+blablabla
 #define R 10
 
 struct data
