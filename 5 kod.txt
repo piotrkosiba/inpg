@@ -2,6 +2,7 @@ int * add(int* tab, int n, int new_elem);
 
 int main()
 {
+    int a;
     int *tab=NULL,i;
 
     for(i=0;i<10;i++)
